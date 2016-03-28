@@ -12,9 +12,22 @@
 
 import * as express from 'express';
 import * as findPort from 'find-port';
+import * as httpProxy from 'http-proxy';
 import * as http from 'http';
 import * as opn from 'opn';
 import { makeApp } from './make_app';
+
+var proxy = new httpProxy.RoutingProxy();
+
+function apiProxy(host, port) {
+  return function(req, res, next) {
+    if(req.url.match(new RegExp('auth|screener|user|logout'))) {
+      proxy.proxyRequest(req, res, {host: host, port: port});
+    } else {
+      next();
+    }
+  }
+}
 
 interface ServerOptions {
   port?: number;
@@ -67,6 +80,8 @@ function startWithPort(options: ServerOptions) {
     packageName: options.packageName,
     root: process.cwd(),
   });
+
+  app.use(apiProxy('localhost', 8421));
 
   app.get('/', function (req, res) {
     res.redirect(301, `/components/${polyserve.packageName}/`);

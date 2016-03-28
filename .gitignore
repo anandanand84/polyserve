@@ -2,3 +2,4 @@
 .DS_Store
 typings/
 lib/
+.idea/

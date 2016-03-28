@@ -18,6 +18,7 @@
   "dependencies": {
     "express": "^4.8.5",
     "find-port": "^1.0.1",
+    "http-proxy": "^0.10.4",
     "minimist": "^1.1.1",
     "opn": "^3.0.2",
     "resolve": "^1.0.0",

@@ -50,6 +50,7 @@ export function makeApp(options: AppOptions): PolyserveApplication {
     res.redirect(301, `./${packageName}/`);
   });
 
+
   app.get('*', function (req, res) {
     // Serve local files from . and other components from bower_components
     let url = parseUrl(req.url, true);
