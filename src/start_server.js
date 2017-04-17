@@ -17,7 +17,7 @@ var make_app_1 = require('./make_app');
 var proxy = new httpProxy.RoutingProxy();
 function apiProxy(host, port) {
     return function (req, res, next) {
-        if (req.url.match(new RegExp('auth|screener|user|logout|session'))
+        if (req.url.match(new RegExp('api|auth|screener|user|logout|session'))
             && (((req.url.indexOf('.html') === -1)
                 && (req.url.indexOf('.js') === -1)
                 && (req.url.indexOf('.css') === -1)
